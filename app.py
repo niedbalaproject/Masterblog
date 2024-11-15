@@ -28,9 +28,9 @@ def add():
         content = request.form.get('content')
 
         blog_posts = load_posts()
-
+        new_id = max(post['id'] for post in blog_posts) + 1 if blog_posts else 1
         new_post = {
-            'id': len(blog_posts) + 1,  # ensure the ID is unique
+            'id': new_id,  # ensure the ID is unique
             'author': author,
             'title': title,
             'content': content
@@ -41,6 +41,14 @@ def add():
         return redirect(url_for('index'))
 
     return render_template('add.html')
+
+
+@app.route('/delete/<int:post_id>', methods=['POST'])
+def delete(post_id):
+    blog_posts = load_posts()  # load the current list of posts
+    blog_posts = [post for post in blog_posts if post['id'] != post_id]  # remove the post with a matching ID
+    save_posts(blog_posts)  # save the updated list back to the file
+    return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
