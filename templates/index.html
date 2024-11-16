@@ -21,6 +21,12 @@
             <p><em>Written by {{ post['author'] }}</em></p>
             <p>{{ post['content'] }}</p>
 
+            <!-- Display like count and like button -->
+            <p>Likes: {{ post.likes }}</p>
+            <form action="{{ url_for('like', post_id=post.id) }}" method="POST" style="display:inline;">
+                <button type="submit" class="like-button">Like</button>
+            </form>
+
             <!-- Add a delete button -->
             <form action="{{ url_for('delete', post_id=post['id']) }}" method="POST" style="display:inline;">
                 <button type="submit" class="delete-button">Delete</button>

@@ -65,7 +65,8 @@ def add():
             'id': posts[-1]['id'] + 1 if posts else 1,  # Incremental ID based on the current number of posts
             'author': request.form['author'],
             'title': request.form['title'],
-            'content': request.form['content']
+            'content': request.form['content'],
+            'likes': 0
         }
         posts.append(new_post)
         save_posts(posts)
@@ -110,6 +111,22 @@ def update(post_id):
         return redirect('/')
 
     return render_template('update.html', post=post)
+
+
+@app.route('/like/<int:post_id>', methods=['POST'])
+def like(post_id):
+    """
+    Handle liking a blog post.
+    :param post_id: int: The ID of the blog post to like.
+    :return: Redirects to the homepage after liking the post.
+    """
+    posts = load_posts()
+    for post in posts:
+        if post['id'] == post_id:
+            post['likes'] += 1
+            break
+    save_posts(posts)
+    return redirect('/')
 
 
 if __name__ == '__main__':
