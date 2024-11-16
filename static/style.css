@@ -31,7 +31,7 @@ h1 {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.add-link {
+.add-link, .update-link {
     display: inline-block;
     margin: 10px 0;
     padding: 10px 15px;
@@ -41,7 +41,7 @@ h1 {
     border-radius: 5px;
 }
 
-.add-link:hover {
+.add-link:hover, .update-link:hover {
     background-color: #45a049;
 }
 
@@ -54,6 +54,6 @@ h1 {
     border-radius: 5px;
 }
 
-.delete-buttom:hover {
-    background-color: #C70039;
+.delete-button:hover {
+    background-color: #C70039; /* FIXED: Corrected typo in CSS class */
 }
